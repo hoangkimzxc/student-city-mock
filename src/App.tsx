@@ -3,7 +3,9 @@ import cityApi from "./api/cityApi";
 
 export default function App() {
   useEffect(() => {
-    cityApi.getAll().then((res) => console.log(res));
+    cityApi
+      .getAll()
+      .then((res) => res.data.forEach((i) => console.log(i.name)));
   });
   return <div>App</div>;
 }
