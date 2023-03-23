@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import cityApi from "./api/cityApi";
 import { NotFound, PrivateRoute } from "./components/Common";
 import { AdminLayout } from "./components/Layout";
-import { LoginPage } from "./features/auth/pages/LoginPage";
+import LoginPage from "./features/auth/pages/LoginPage";
 
 export default function App() {
   useEffect(() => {
