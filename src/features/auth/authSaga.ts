@@ -1,4 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
+import { push } from "redux-first-history";
 import { call, delay, fork, put, take } from "redux-saga/effects";
 import { authActions, LoginPayload } from "./authSlice";
 
@@ -13,6 +14,8 @@ function* handleLogin(payload: LoginPayload) {
         name: "Easy Frontend",
       })
     );
+    //redirect to admin page
+    yield put(push("/admin"));
   } catch (error: any) {
     yield put(authActions.loginFailed(error.message));
   }
@@ -23,6 +26,7 @@ function* handleLogout() {
   console.log("Handle Logout");
   localStorage.removeItem("access_token");
   //redirect to login page
+  yield put(push("/login"));
 }
 
 function* watchLoginFlow() {
