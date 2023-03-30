@@ -15,7 +15,8 @@ export interface AuthSate {
 
 const initialState: AuthSate = {
   isLoggedIn: false,
-  logging: true,
+  //fix logging
+  logging: false,
   currentUser: undefined,
 };
 

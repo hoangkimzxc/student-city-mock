@@ -1,11 +1,13 @@
 import { Button, Paper, Typography } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/system";
 import React from "react";
-import { useAppDispatch } from "../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { authActions } from "../authSlice";
 
 function LoginPage() {
   const dispatch = useAppDispatch();
+  const isLogging = useAppSelector((state) => state.auth.logging);
 
   const handleLoginClick = () => {
     dispatch(
@@ -30,7 +32,8 @@ function LoginPage() {
             className="w-full"
             onClick={handleLoginClick}
           >
-            Fake Login
+            {isLogging && <CircularProgress size={20} color="secondary" />}{" "}
+            &nbsp; Fake Login
           </Button>
         </Box>
       </Paper>
