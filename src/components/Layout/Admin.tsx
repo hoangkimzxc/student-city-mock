@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import { makeStyles } from "@mui/styles";
 import { Header, Sidebar } from "../Common";
+import { Outlet } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -34,7 +35,9 @@ export function AdminLayout() {
       <Box className={classes.sidebar}>
         <Sidebar />
       </Box>
-      <Box className={classes.main}>Main</Box>
+      <Box className={classes.main}>
+        <Outlet />
+      </Box>
     </Box>
   );
 }
