@@ -14,8 +14,8 @@ const theme = createTheme();
 export interface StudentTableProps {
   studentList: Student[];
 
-  onEdit: (student: Student) => void;
-  onRemove: (student: Student) => void;
+  onEdit?: (student: Student) => void;
+  onRemove?: (student: Student) => void;
 }
 
 export default function StudentTable({
@@ -46,7 +46,7 @@ export default function StudentTable({
               <TableCell>{student.city}</TableCell>
               <TableCell align="right">
                 <Button
-                  variant="contained"
+                  size="small"
                   color="primary"
                   onClick={() => onEdit?.(student)}
                   sx={{ marginRight: theme.spacing(1) }}
@@ -54,7 +54,7 @@ export default function StudentTable({
                   Edit
                 </Button>
                 <Button
-                  variant="outlined"
+                  size="small"
                   color="secondary"
                   onClick={() => onRemove?.(student)}
                 >
