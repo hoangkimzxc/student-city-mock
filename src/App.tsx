@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { NotFound, PrivateRoute } from "./components/Common";
 import { AdminLayout } from "./components/Layout";
 import LoginPage from "./features/auth/pages/LoginPage";
@@ -10,6 +10,7 @@ import AddEditPage from "./features/student/pages/AddEditPage";
 export default function App() {
   return (
     <Routes>
+      <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/login" element={<LoginPage />} />
       <Route element={<PrivateRoute />}>
         <Route path="admin" element={<AdminLayout />}>

@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Student } from "../../../models";
 import { Box, Button, Typography, createTheme } from "@mui/material";
+import { capitalizeString, getMarkColor } from "../../../utils";
 
 const theme = createTheme();
 
@@ -41,8 +42,12 @@ export default function StudentTable({
             <TableRow key={student.id}>
               <TableCell>{student.id}</TableCell>
               <TableCell>{student.name}</TableCell>
-              <TableCell>{student.gender}</TableCell>
-              <TableCell>{student.mark}</TableCell>
+              <TableCell>{capitalizeString(student.gender)}</TableCell>
+              <TableCell>
+                <Box fontWeight={"bold"} color={getMarkColor(student.mark)}>
+                  {student.mark}
+                </Box>
+              </TableCell>
               <TableCell>{student.city}</TableCell>
               <TableCell align="right">
                 <Button
