@@ -2,6 +2,9 @@ import Box from "@mui/material/Box";
 import { makeStyles } from "@mui/styles";
 import { Header, Sidebar } from "../Common";
 import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { useAppDispatch } from "../../app/hooks";
+import { cityActions } from "../../features/city/citySlice";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -26,6 +29,11 @@ const useStyles = makeStyles(() => ({
 }));
 
 export function AdminLayout() {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(cityActions.fetchCityList());
+  }, [dispatch]);
+
   const classes = useStyles();
   return (
     <Box className={classes.root}>

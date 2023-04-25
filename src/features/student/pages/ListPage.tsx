@@ -16,6 +16,7 @@ import {
   LinearProgress,
 } from "@mui/material";
 import StudentTable from "../components/StudentTable";
+import { selectCityMap } from "../../city/citySlice";
 
 const theme = createTheme();
 
@@ -24,6 +25,7 @@ export default function ListPage() {
   const pagination = useAppSelector(selectStudentPagination);
   const filter = useAppSelector(selectStudentFilter);
   const loading = useAppSelector(selectStudentLoading);
+  const cityMap = useAppSelector(selectCityMap);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -55,7 +57,7 @@ export default function ListPage() {
         </Button>
       </Box>
       {/* Student Table */}
-      <StudentTable studentList={studentList} />
+      <StudentTable studentList={studentList} cityMap={cityMap} />
       {/* Pagination */}
       <Box my={2} display={"flex"} justifyContent={"center"}>
         <Pagination
