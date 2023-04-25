@@ -16,7 +16,9 @@ import {
   LinearProgress,
 } from "@mui/material";
 import StudentTable from "../components/StudentTable";
-import { selectCityMap } from "../../city/citySlice";
+import { selectCityList, selectCityMap } from "../../city/citySlice";
+import StudentFilters from "../components/StudentFilters";
+import { ListParams } from "../../../models";
 
 const theme = createTheme();
 
@@ -26,6 +28,7 @@ export default function ListPage() {
   const filter = useAppSelector(selectStudentFilter);
   const loading = useAppSelector(selectStudentLoading);
   const cityMap = useAppSelector(selectCityMap);
+  const cityList = useAppSelector(selectCityList);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -35,6 +38,12 @@ export default function ListPage() {
   const handlePageChange = (e: any, page: number) => {
     dispatch(studentActions.setFilter({ ...filter, _page: page }));
   };
+
+  const handleSearchChange = (newFilter: ListParams) => {
+    console.log("Search change:", newFilter);
+    dispatch(studentActions.setFilterWithDebounce(newFilter));
+  };
+
   return (
     <Box sx={{ position: "relative", paddingTop: theme.spacing(1) }}>
       {loading && (
@@ -56,6 +65,16 @@ export default function ListPage() {
           Add new student
         </Button>
       </Box>
+
+      {/* Student Filters */}
+      <Box mb={3}>
+        <StudentFilters
+          filter={filter}
+          cityList={cityList}
+          onSearchChange={handleSearchChange}
+        />
+      </Box>
+
       {/* Student Table */}
       <StudentTable studentList={studentList} cityMap={cityMap} />
       {/* Pagination */}

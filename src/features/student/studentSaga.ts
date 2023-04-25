@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from "redux-saga/effects";
+import { call, debounce, put, takeLatest } from "redux-saga/effects";
 import { studentActions } from "./studentSlice";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { ListParams, ListResponse, Student } from "../../models";
@@ -17,7 +17,19 @@ function* fetchStudentList(action: PayloadAction<ListParams>) {
   }
 }
 
+function* handleSearchDebounce(action: PayloadAction<ListParams>) {
+  console.log("Student Saga Debounce", action.payload);
+
+  yield put(studentActions.setFilter(action.payload));
+}
+
 export default function* studentSaga() {
   // watach fetch student action
   yield takeLatest(studentActions.fetchStudentList, fetchStudentList);
+
+  yield debounce(
+    500,
+    studentActions.setFilterWithDebounce.type,
+    handleSearchDebounce
+  );
 }

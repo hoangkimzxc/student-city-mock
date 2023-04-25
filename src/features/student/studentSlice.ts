@@ -17,7 +17,11 @@ export interface StudentState {
 const initialState: StudentState = {
   loading: false,
   list: [],
-  filter: { _page: 1, _limit: 15 },
+  filter: {
+    _page: 1,
+    _limit: 15,
+    // name_like: "litt"
+  },
   pagination: {
     _page: 1,
     _limit: 15,
@@ -46,6 +50,7 @@ const studentSlice = createSlice({
     setFilter(state, action: PayloadAction<ListParams>) {
       state.filter = action.payload;
     },
+    setFilterWithDebounce(state, action: PayloadAction<ListParams>) {},
   },
 });
 
