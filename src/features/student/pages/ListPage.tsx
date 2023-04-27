@@ -40,8 +40,14 @@ export default function ListPage() {
   };
 
   const handleSearchChange = (newFilter: ListParams) => {
-    console.log("Search change:", newFilter);
     dispatch(studentActions.setFilterWithDebounce(newFilter));
+  };
+
+  const handleFilterChange = (newFilter: ListParams) => {
+    const action = studentActions.setFilter(newFilter);
+    console.log("City change action", action);
+
+    dispatch(studentActions.setFilter(newFilter));
   };
 
   return (
@@ -72,6 +78,7 @@ export default function ListPage() {
           filter={filter}
           cityList={cityList}
           onSearchChange={handleSearchChange}
+          onChange={handleFilterChange}
         />
       </Box>
 
