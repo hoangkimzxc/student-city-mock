@@ -30,7 +30,7 @@ export default function StudentTable({
       <Table size="small" aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="center">#</TableCell>
+            <TableCell align="left">#</TableCell>
             <TableCell>Name</TableCell>
             <TableCell>Gender</TableCell>
             <TableCell>Mark</TableCell>

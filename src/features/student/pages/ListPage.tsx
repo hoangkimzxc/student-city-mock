@@ -45,8 +45,6 @@ export default function ListPage() {
 
   const handleFilterChange = (newFilter: ListParams) => {
     const action = studentActions.setFilter(newFilter);
-    console.log("City change action", action);
-
     dispatch(studentActions.setFilter(newFilter));
   };
 
