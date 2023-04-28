@@ -18,7 +18,8 @@ import {
 import StudentTable from "../components/StudentTable";
 import { selectCityList, selectCityMap } from "../../city/citySlice";
 import StudentFilters from "../components/StudentFilters";
-import { ListParams } from "../../../models";
+import { ListParams, Student } from "../../../models";
+import studentApi from "../../../api/studentApi";
 
 const theme = createTheme();
 
@@ -44,8 +45,22 @@ export default function ListPage() {
   };
 
   const handleFilterChange = (newFilter: ListParams) => {
-    const action = studentActions.setFilter(newFilter);
     dispatch(studentActions.setFilter(newFilter));
+  };
+
+  const handleRemoveStudent = async (student: Student) => {
+    console.log("Handle remove student", student);
+    try {
+      //Remove student API
+      await studentApi.remove(student?.id || "");
+
+      //Trigger to re-fetch student list with current filter
+      const newFilter = { ...filter };
+      dispatch(studentActions.setFilter(newFilter));
+    } catch (error) {
+      //Toast error
+      console.log("Failed to fetch student", error);
+    }
   };
 
   return (
@@ -81,7 +96,11 @@ export default function ListPage() {
       </Box>
 
       {/* Student Table */}
-      <StudentTable studentList={studentList} cityMap={cityMap} />
+      <StudentTable
+        studentList={studentList}
+        cityMap={cityMap}
+        onRemove={handleRemoveStudent}
+      />
       {/* Pagination */}
       <Box my={2} display={"flex"} justifyContent={"center"}>
         <Pagination
