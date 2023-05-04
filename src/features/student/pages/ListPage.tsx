@@ -20,6 +20,7 @@ import { selectCityList, selectCityMap } from "../../city/citySlice";
 import StudentFilters from "../components/StudentFilters";
 import { ListParams, Student } from "../../../models";
 import studentApi from "../../../api/studentApi";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
@@ -30,6 +31,9 @@ export default function ListPage() {
   const loading = useAppSelector(selectStudentLoading);
   const cityMap = useAppSelector(selectCityMap);
   const cityList = useAppSelector(selectCityList);
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -63,6 +67,10 @@ export default function ListPage() {
     }
   };
 
+  const handleEditStudent = async (student: Student) => {
+    navigate(`${location.pathname}/${student.id}`);
+  };
+
   return (
     <Box sx={{ position: "relative", paddingTop: theme.spacing(1) }}>
       {loading && (
@@ -80,9 +88,11 @@ export default function ListPage() {
         }}
       >
         <Typography variant="h4">Students</Typography>
-        <Button variant="contained" color="primary">
-          Add new student
-        </Button>
+        <Link to={`${location.pathname}/add`}>
+          <Button variant="contained" color="primary">
+            Add new student
+          </Button>
+        </Link>
       </Box>
 
       {/* Student Filters */}
@@ -99,6 +109,7 @@ export default function ListPage() {
       <StudentTable
         studentList={studentList}
         cityMap={cityMap}
+        onEdit={handleEditStudent}
         onRemove={handleRemoveStudent}
       />
       {/* Pagination */}

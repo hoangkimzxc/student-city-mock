@@ -8,7 +8,7 @@ GET {{baseUrl}}/students?_page=1&_limit=10&_sort=mark&_order=desc
 ###
 
 # @name getStudentById
-GET {{baseUrl}}/students/u6V7vww
+GET {{baseUrl}}/students/lea11ziflg8xoizf
 
 ###
 
