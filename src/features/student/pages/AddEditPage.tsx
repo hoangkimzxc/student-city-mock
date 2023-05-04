@@ -5,6 +5,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { useEffect, useState } from "react";
 import { Student } from "../../../models";
 import studentApi from "../../../api/studentApi";
+import StudentForm from "../components/StudentForm";
 
 export default function AddEditPage() {
   const { studentId } = useParams<{ studentId: string }>();
@@ -27,6 +28,19 @@ export default function AddEditPage() {
 
   console.log("Found student", student);
 
+  const initialValues: Student = {
+    name: "",
+    age: "",
+    mark: "",
+    gender: "male",
+    city: "",
+    ...student,
+  } as Student;
+
+  const handleStudentFormSubmit = (formValues: Student) => {
+    // TODO: Handle submit here, call API to add/update student
+  };
+
   return (
     <Box>
       <Link to="/admin/students">
@@ -40,6 +54,18 @@ export default function AddEditPage() {
       <Typography variant="h4">
         {isEdit ? "Update student info" : "Add new student"}
       </Typography>
+
+      {/* Chi khoi tao form khi initialValue da san sang vi initialValue chi tao lan dau tien
+      Va o trong mode edit no moi call api de lay ve du lieu cua student nen phai check dieu kien 
+      tra ve roi moi render form*/}
+      {(!isEdit || Boolean(student)) && (
+        <Box mt={3}>
+          <StudentForm
+            initialValues={initialValues}
+            onSubmit={handleStudentFormSubmit}
+          />
+        </Box>
+      )}
     </Box>
   );
 }
