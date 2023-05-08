@@ -37,9 +37,7 @@ export default function StudentFilters({
     onSearchChange(newFilter);
   };
 
-  const handleCityChange = (
-    e: ChangeEvent<{ name?: string; value: unknown }>
-  ) => {
+  const handleCityChange = (e: any) => {
     if (!onChange) return;
 
     const newFilter: ListParams = {
@@ -50,9 +48,7 @@ export default function StudentFilters({
     onChange(newFilter);
   };
 
-  const handleSortChange = (
-    e: ChangeEvent<{ name?: string; value: unknown }>
-  ) => {
+  const handleSortChange = (e: any) => {
     if (!onChange) return;
     const value = e.target.value;
     const [_sort, _order] = (value as string).split(".");
