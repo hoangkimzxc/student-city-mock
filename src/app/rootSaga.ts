@@ -6,7 +6,6 @@ import studentSaga from "../features/student/studentSaga";
 import citySaga from "../features/city/citySaga";
 
 export default function* rootSaga() {
-  console.log("Root saga");
   yield all([
     counterSaga(),
     authSaga(),
