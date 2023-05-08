@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { useEffect, useState } from "react";
@@ -9,6 +9,7 @@ import StudentForm from "../components/StudentForm";
 
 export default function AddEditPage() {
   const { studentId } = useParams<{ studentId: string }>();
+  const navigate = useNavigate();
 
   const isEdit = Boolean(studentId);
 
@@ -37,8 +38,14 @@ export default function AddEditPage() {
     ...student,
   } as Student;
 
-  const handleStudentFormSubmit = (formValues: Student) => {
+  const handleStudentFormSubmit = async (formValues: Student) => {
     // TODO: Handle submit here, call API to add/update student
+    if (isEdit) {
+      await studentApi.update(formValues);
+    } else {
+      await studentApi.add(formValues);
+    }
+    navigate("/admin/students");
   };
 
   return (

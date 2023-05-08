@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { ChangeEvent, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import {
   selectStudentFilter,
@@ -40,7 +40,7 @@ export default function ListPage() {
     dispatch(studentActions.fetchStudentList(filter));
   }, [dispatch, filter]);
 
-  const handlePageChange = (e: any, page: number) => {
+  const handlePageChange = (e: ChangeEvent<unknown>, page: number) => {
     dispatch(studentActions.setFilter({ ...filter, _page: page }));
   };
 
