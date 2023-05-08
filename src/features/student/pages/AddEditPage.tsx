@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Student } from "../../../models";
 import studentApi from "../../../api/studentApi";
 import StudentForm from "../components/StudentForm";
+import { toast } from "react-toastify";
 
 export default function AddEditPage() {
   const { studentId } = useParams<{ studentId: string }>();
@@ -27,8 +28,6 @@ export default function AddEditPage() {
     })();
   }, [studentId]);
 
-  console.log("Found student", student);
-
   const initialValues: Student = {
     name: "",
     age: "",
@@ -45,6 +44,8 @@ export default function AddEditPage() {
     } else {
       await studentApi.add(formValues);
     }
+
+    toast("Save student successfully!");
     navigate("/admin/students");
   };
 

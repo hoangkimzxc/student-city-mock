@@ -21,6 +21,7 @@ import StudentFilters from "../components/StudentFilters";
 import { ListParams, Student } from "../../../models";
 import studentApi from "../../../api/studentApi";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const theme = createTheme();
 
@@ -53,10 +54,10 @@ export default function ListPage() {
   };
 
   const handleRemoveStudent = async (student: Student) => {
-    console.log("Handle remove student", student);
     try {
       //Remove student API
       await studentApi.remove(student?.id || "");
+      toast("Remove student successfully");
 
       //Trigger to re-fetch student list with current filter
       const newFilter = { ...filter };
